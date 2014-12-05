@@ -48,6 +48,7 @@ var html = '<!doctype html>' +
 '</html>'
 
 var server = http.createServer(function (req, res) {
+	if(req.url == '/') {
 		switch (req.method) {
 			case 'POST':
 				var item = '';
@@ -62,10 +63,7 @@ var server = http.createServer(function (req, res) {
 				});
 				break;
 			case 'GET':
-				req.url = '/index.html';
-				items.forEach(function (item, i) {
-					res.write(html);
-				});
+				res.write(html);
 				res.end();
 				break;
 			case 'DELETE':
@@ -109,6 +107,7 @@ var server = http.createServer(function (req, res) {
 				}
 				break;
 		}
+	}
 
 	var url = parse(req.url);
 	var path = join(root, url.pathname);

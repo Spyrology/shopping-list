@@ -19,9 +19,9 @@ var html = '<!doctype html>' +
 	'<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet" type="text/css">' +
 
 	'<!--scripts-->' +
-	'<script src="https://code.jquery.com/jquery.min.js"></script>' +
+	'<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>' +
 	'<script src="jquery-ui/jquery-ui.js"></script>' +
-	'<script src="js/app.js"></script>' +
+	'<script src="js/app2.js"></script>' +
 '</head>' +
 '<body>' +
 	'<div id="wrapper">' +
@@ -55,21 +55,26 @@ var server = http.createServer(function (req, res) {
 				req.setEncoding('utf8');
 				req.on('data', function (chunk) {
 					item += chunk;
+					//console.log(item + "xyz");
 				});
 				req.on('end', function () {
-					var obj = qs.parse(item);
+					console.log(item);
+					//var obj = qs.parse(item);
 					items.push(item);
-					res.end('The item: "' + item + '" was added successfully');
+					console.log(items);
+					res.end();
 				});
 				break;
 			case 'GET':
-				req.url = '/index.html';
-				items.forEach(function (item, i) {
-					res.write(html);
-				});
+				//req.url = '/index.html';
+				//items.forEach(function (item, i) {
+				//	res.write(html);
+				//});
+				res.write(html);
 				res.end();
 				break;
 			case 'DELETE':
+				console.log("made it");
 				var pathname = url.parse(req.url).pathname;
 				var i = parseInt(pathname.slice(1), 10);
 
