@@ -6,72 +6,26 @@ var fs = require('fs');
 var root = __dirname;
 var qs = require('querystring');
 var items = [];
-var html = '<!doctype html>' +
-'<html lang="en">' +
-'<head>' +
-	'<meta charset="UTF-8">' +
-	'<title>Carpe Diem</title>' +
-
-	'<!--styles-->' +
-	'<link type="text/css" rel="stylesheet" href="styles/reset.css">' +
-	'<link type="text/css" rel="stylesheet" href="styles/style.css">' +
-	'<link type="text/css" rel="stylesheet" href="styles/animate.css">' +
-	'<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet" type="text/css">' +
-
-	'<!--scripts-->' +
-	'<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>' +
-	'<script src="jquery-ui/jquery-ui.js"></script>' +
-	'<script src="js/app2.js"></script>' +
-'</head>' +
-'<body>' +
-	'<div id="wrapper">' +
-		'<header>Today, I will...</header>' +
-			'<section>' +
-				'<form action="/" method="post">' +
-					'<input id="add" type="text" maxlength="22" placeholder="design my next app." required="" autocomplete="off">' +
-				'</form>' +
-			'</section>' +
-		'<section>' +
-			'<ul id="list">' +
-				'<li class="item-added">write a poem' +
-					'<div class="delete"><span>&#x2717</span></div>' +
-					'<div class="check"><span>&#x2713</span></div>' +
-				'</li>' +
-				'<li class="item-added">drag me' +
-					'<div class="delete"><span>&#x2717</span></div>' +
-					'<div class="check"><span>&#x2713</span></div>' +
-				'</li>' +
-			'</ul>' +
-		'</section>' +
-	'</div>' +
-'</body>' +
-'</html>'
+//var itemID = items.length;
 
 var server = http.createServer(function (req, res) {
 	if(req.url == '/') {
 		switch (req.method) {
 			case 'POST':
 				var item = '';
+				//itemID++;
 				req.setEncoding('utf8');
 				req.on('data', function (chunk) {
 					item += chunk;
-					//console.log(item + "xyz");
 				});
 				req.on('end', function () {
-					console.log(item);
-					//var obj = qs.parse(item);
 					items.push(item);
 					console.log(items);
 					res.end();
 				});
 				break;
 			case 'GET':
-				//req.url = '/index.html';
-				//items.forEach(function (item, i) {
-				//	res.write(html);
-				//});
-				res.write(html);
-				res.end();
+				req.url = '/index.html';
 				break;
 			case 'DELETE':
 				console.log("made it");

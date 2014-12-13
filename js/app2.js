@@ -25,7 +25,7 @@ $(document).ready(function() {
       dataType: "json"
       })
       //.done(function(results) {
-      console.log("we have reached done");
+      console.log("why won't this console log work?");  
       $("#list").prepend($("<li class='item-added animated flipInX'>" + item + "<div class='delete'><span>&#x2717</span></div><div class='check'><span>&#x2713</span></div></li>"));
       $("#add").val('');
       //})
